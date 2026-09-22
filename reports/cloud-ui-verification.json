@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-09-22T02:36:59.936502+00:00",
+  "method": "signed-in Cognee Cloud UI upload",
+  "dataset_name": "secondlook_upgrade_evidence",
+  "document": "secondlook-cloud-evidence.txt",
+  "document_sha256": "a72449409fcf7a3d666ff08fe6fc3c8a98f5c0757c8d039f1d6bfdc9fbf92fe4",
+  "extracted_entities": 22,
+  "record_count": 10,
+  "observed_entity_types": {
+    "testresult": 6,
+    "dockerimage": 2,
+    "packageversion": 2,
+    "package": 1,
+    "test": 1
+  },
+  "canvas_render_verified": true,
+  "api_upload_verified": false,
+  "exact_cloud_retrieval_verified": false,
+  "note": "Cognee Cloud graph visually rendered the uploaded finding, with22 extracted entities. The graph includes Pydantic versions, test results, nickname field, import_row, and fix_patch. UI counts are separate from the API-created dataset and REST graph counts.",
+  "canvas_verified_at": "2026-09-22T02:42:14.722560+00:00"
+}
