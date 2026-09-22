@@ -16,53 +16,71 @@ Call the third result “Passed the compatibility check shown.” Do not say “
 
 Three-minute timing: problem and introduction 0:00–0:30; pandas failure 0:30–0:55; Pydantic failure 0:55–1:20; corrected passing result 1:20–1:35; Bright Data log 1:35–2:00; Cognee graph 2:00–2:25; automatic recall cards 2:25–2:45; closing 2:45–3:00. Bright Data and Cognee integration evidence belongs to the Pydantic investigation; the pandas case is a prepared Docker comparison.
 
-## What to say — about three minutes with the demo
+## Full three-minute pitch with screen links
 
-*[Start on the Secondlook dashboard.]*
+Open these tabs before presenting:
 
-“You upgrade a library your app depends on. Your tests pass. Everything looks fine. Then a customer does something your tests never covered—and it breaks.
+- [Secondlook dashboard](http://127.0.0.1:8765/) — requires the local server.
+- [Secondlook source repository](https://github.com/Eman-Gon/secondlook) — matches the configured Git remote.
+- [GPU energy recommender repository](https://github.com/Eman-Gon/gpu-energy-recommender).
+- [Bright Data MCP Event Log](https://brightdata.com/cp/mcp/event_log) — signed-in account.
+- [Cognee Cloud knowledge graph](https://platform.cognee.ai/knowledge-graph) — signed-in account; select `secondlook_upgrade_evidence` to match the supplied screenshot.
 
-“Developers already reduce this risk by locking versions, reviewing updates through tools like Dependabot, and running automated tests. Renovate also estimates upgrade risk using other projects’ results.
+### 0:00–0:30 — Problem and introduction
 
-“But what happens to the behavior your tests missed?
+*[Show the Secondlook dashboard. Keep the source repository available for questions.]*
 
-“I built Secondlook to explore that gap. Its dashboard flags code matching known compatibility risks. For prepared cases, it brings together documentation, before-and-after tests, and a tested fix.
+“You upgrade a library. Your tests pass. Then a customer does something your tests never covered—and it breaks.
 
-*[Open the customer-import case. Point to the existing tests passing on both versions.]*
+“Teams already lock dependency versions, use tools like Dependabot, and run automated tests. Renovate also estimates risk from other projects’ results.
 
-“This app requires a customer’s name, but customers should be able to leave out their nickname. After upgrading Pydantic—the library that checks the input—leaving out the nickname causes an error. The existing tests still pass because they never try that situation.
+“I built Secondlook to explore what those tests might miss: flagging known compatibility risks and, for prepared cases, bringing together documentation, before-and-after checks, and tested fixes.”
 
-*[Point to the targeted check: Pass / Fail.]*
+### 0:30–0:55 — First change needed: pandas
 
-“These are saved results from a successful live run. The same targeted test passes on the old version and fails on the new one, in isolated Docker environments.
+*[In the dashboard, select GPU energy recommender. Its source is in the repository linked above; the measured snapshot is https://github.com/Eman-Gon/gpu-energy-recommender/blob/7a802eace3a3775acc5ea4af6c266079e2599eb3/eda/data_collection.py .]*
 
-*[Show the patch and the fixed check: Pass / Pass.]*
+“First, two data-collection functions from my GPU energy repository. They pass with pandas 2.3.3 but fail with pandas 3.0.0 because the uppercase hourly-frequency alias was removed. Changing uppercase H to lowercase h makes these checks pass on both versions.”
 
-“We then test a prepared one-line fix—adding an explicit default—and the same check passes on both versions.
+### 0:55–1:20 — Second change needed: Pydantic
 
-*[Switch to Bright Data → MCP → Event Log, as in the second screenshot. Point to the 19:42:09 row.]*
+*[Select Customer import demo. Point to existing tests: Pass / Pass, then targeted check: Pass / Fail.]*
 
-“Bright Data supplies the documentation explaining the change. This is Bright Data’s own log showing a successful request to Pydantic’s website using scrape_as_markdown. The client name, commit-watch, is my app’s internal name. A guided Strands agent using Groq uses the retrieved documentation to propose test data for the selected scenario.
+“Second, this prepared customer-import example. Customers should be able to leave out their nickname. After upgrading Pydantic, that input is rejected. The existing tests still pass because they never try leaving the nickname out. The targeted check reproduces the break in Docker.”
 
-*[Switch to the Cognee graph in the first screenshot: secondlook_upgrade_evidence. Point to customer.nickname, the Pydantic version, probe_old/probe_new, and fix_patch.]*
+### 1:20–1:35 — Passing result after the correction
 
-“Here’s a graph I created by uploading the investigation evidence to Cognee Cloud. You can see the affected nickname field, the dependency version, the before-and-after checks, and the fix organized as connected information.
+*[Show `nickname: Optional[str] = None` and With suggested fix: Pass / Pass.]*
 
-*[Return to Secondlook’s Cognee evidence cards: Stored and retrieved, Inspect retrieved evidence, and previous findings: Recalled.]*
+“Here’s the corrected version. We test a prepared fix: adding an explicit default. The same check now passes on both versions. These are saved results from successful test runs.”
 
-“The application also stores and retrieves findings automatically in separate Cognee datasets. This successful run recalled an earlier finding for the same app and versions, reran the tests, and stored the verified result.
+### 1:35–2:00 — Bright Data provider evidence
 
-“Today, the prototype checks known risks and verifies prepared cases. The broader goal is to help developers answer: what could this upgrade break in my app, and how can I check?
+*[Open the Bright Data Event Log. Point to 2026-09-21 19:42:09: scrape_as_markdown / commit-watch / pydantic.dev / success.]*
+
+“For the Pydantic investigation, Bright Data fetches the official migration guide explaining the change. Here’s its own successful request log. Commit-watch is my app’s internal client name. A guided Strands agent using Groq uses that documentation to propose test data for the selected scenario.”
+
+### 2:00–2:25 — Cognee graph
+
+*[Open Cognee Cloud, select secondlook_upgrade_evidence, and point to customer.nickname, pydantic 1.10.18, probe_old/probe_new, and fix_patch. This is the manually uploaded evidence graph shown in the user's screenshot.]*
+
+“Cognee gives the investigation memory. I uploaded the investigation evidence to create this graph. You can see the affected field, dependency version, before-and-after checks, and fix organized as connected information.”
+
+### 2:25–2:45 — Automatic memory evidence
+
+*[Return to the customer-import dashboard. Show Stored and retrieved, Inspect retrieved evidence, and previous findings: Recalled.]*
+
+“The application also saves and retrieves findings automatically in separate Cognee datasets. This run recalled an earlier finding for the same app and versions, reran the tests, and stored the verified result.”
+
+### 2:45–3:00 — Close
+
+*[Leave the dashboard visible.]*
+
+“Today, this prototype checks known risks and verifies prepared cases. The goal is to help developers investigate what an upgrade could break.
 
 “Bright Data retrieves the source. Docker verifies the behavior. Cognee remembers the result. That’s Secondlook.”
 
-## Screenshot and demo notes
-
-- The first screenshot selects `secondlook_upgrade_evidence`: the manually uploaded evidence document, with 22 extracted entities. Its visible nodes include `customer.nickname`, `pydantic 1.10.18`, `existing_old`, `existing_new`, `probe_old`, `probe_new`, `fixed_old`, `fixed_new`, and `fix_patch`.
-- `existing` means the original tests; `probe` means the added missing-nickname check; `fixed` means that check after the fix. `old` and `new` identify the dependency version being tested.
-- This manual graph is separate from the automatic run’s dataset, `secondlook_compatibility_098a753197e04755befef498f95f612a`. Use the dashboard’s storage/retrieval receipts to demonstrate that automatic workflow. A graph visualization alone does not establish that tests ran or evidence was recalled.
-- The second screenshot shows [Bright Data’s MCP Event Log](https://brightdata.com/cp/mcp/event_log). Show the September 21, 19:42:09 row: `scrape_as_markdown`, `commit-watch`, `pydantic.dev`, `success`. This matches the saved successful Cloud rehearsal.
-- Presentation order: dashboard test results → tested fix → Bright Data event log → manual Cognee graph → dashboard automatic memory receipts → closing line.
+The third result is the corrected second case, not a third independently verified repository. The screenshot's manual graph is separate from automatic dataset `secondlook_compatibility_098a753197e04755befef498f95f612a`. Its 22 extracted entities should not be conflated with the automatic dataset's saved API counts of 22 total nodes and 32 edges. Keep the saved run visible; do not start a fresh live investigation during the timed pitch.
 
 ## What to show, in order
 
