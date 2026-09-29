@@ -562,7 +562,7 @@ def main():
     if not 1 <= args.port <= 65535:
         parser.error("port must be between 1 and 65535")
     server = make_server(port=args.port)
-    print(f"Secondlook dashboard: http://127.0.0.1:{server.server_port}", flush=True)
+    print(f"Hackday Idea dashboard: http://127.0.0.1:{server.server_port}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

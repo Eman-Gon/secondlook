@@ -237,7 +237,7 @@ def classify(results: dict) -> str:
 
 
 def render_report(report: dict) -> str:
-    lines = ["SECONDLOOK — DEPENDENCY UPGRADE", f"Pydantic {VERSIONS[0]} -> {VERSIONS[1]}",
+    lines = ["HACKDAY IDEA — DEPENDENCY UPGRADE", f"Pydantic {VERSIONS[0]} -> {VERSIONS[1]}",
              "Result: " + ("CONFIRMED BEHAVIOR BREAK" if report["status"] == "confirmed_break" else "INCONCLUSIVE"),
              f"Affected code: {report['usage']['path']}:{report['usage']['line']} ({report['usage']['symbol']})",
              f"  {report['usage']['code']}", "", "Measured comparison:"]

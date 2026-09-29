@@ -202,7 +202,7 @@ function renderProjects() {
     }
     if (repositories.children.length) $('project-select').append(repositories);
     const demos = node('optgroup');
-    demos.label = 'Demo ready · saved source scans';
+    demos.label = 'Saved examples · saved source scans';
     for (const entry of state.demoReady) {
       if (!entry.available || !entry.scan) continue;
       const option = node('option', '', entry.repository);
@@ -272,7 +272,7 @@ function renderNavigation() {
     if (active) $(id).setAttribute('aria-current', 'page');
     else $(id).removeAttribute('aria-current');
   }
-  document.title = demo ? `${detail ? entry.title + ' · ' : ''}Demo ready — Secondlook` : 'Secondlook — dependency checks';
+  document.title = demo ? `${detail ? entry.title + ' · ' : ''}Saved examples — Hackday Idea` : 'Hackday Idea — dependency checks';
 }
 
 function selectResult(id) {
@@ -812,7 +812,7 @@ function downloadReport() {
   const url = URL.createObjectURL(blob);
   const anchor = node('a');
   anchor.href = url;
-  anchor.download = `secondlook-${item ? item.id : 'repository-scan'}-report.json`;
+  anchor.download = `hackday-idea-${item ? item.id : 'repository-scan'}-report.json`;
   document.body.append(anchor);
   anchor.click();
   anchor.remove();

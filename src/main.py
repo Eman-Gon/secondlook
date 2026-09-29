@@ -14,7 +14,7 @@ from .sandbox import SandboxError, preflight, run_sandbox
 
 
 def parser() -> argparse.ArgumentParser:
-    cli = argparse.ArgumentParser(description="Secondlook: investigate dependency upgrades with reproducible tests.")
+    cli = argparse.ArgumentParser(description="Hackday Idea: investigate dependency upgrades with reproducible tests.")
     commands = cli.add_subparsers(dest="command", required=True)
     ingest = commands.add_parser("ingest", help="Store 30–50 commits as the repo baseline.")
     ingest.add_argument("--count", type=int, help="Number of commits (30–50; default from .env).")

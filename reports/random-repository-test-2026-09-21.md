@@ -1,6 +1,6 @@
 # Five-repository live test — September 21, 2026
 
-Tested Secondlook’s existing public-repository workflow through the real dashboard HTTP API at `http://127.0.0.1:8765`. Five repositories were sampled without replacement from the seven supplied repositories using `random.SystemRandom().sample`. The saved selection was not changed after seeing the outcomes.
+Tested Hackday Idea’s existing public-repository workflow through the real dashboard HTTP API at `http://127.0.0.1:8765`. Five repositories were sampled without replacement from the seven supplied repositories using `random.SystemRandom().sample`. The saved selection was not changed after seeing the outcomes.
 
 **Result: three checks were blocked by the download limit; two completed with very limited file coverage and no identified dependencies. None establishes dependency compatibility or a verified application failure.**
 
@@ -31,7 +31,7 @@ Each repository request returned HTTP 202, a scan ID, progress, and a terminal c
 
 The initial API contract check failed on the two completed scans because the running server omitted the new `explanation` field. The parallel dashboard task then updated the backend while preserving scan state. A final HTTP check confirmed that all five original scan IDs survived and both completed results now include explanation objects. Browser verification also confirmed the quiche explanation explicitly says only one file was read, no dependencies were identified, and no code or tests were run. The original raw responses remain unchanged; [post-update evidence](/Users/emanschool/secondlook/.commit-watch/random-repo-test-20260922T023634Z/after-server-update.json) is recorded separately.
 
-Independent local regression run: `.venv/bin/python -m pytest tests/test_public_repo.py tests/test_result_explanation.py tests/test_dashboard.py -q` — **59 tests passed, 79 subtests passed**. Localhost server tests required execution outside the restrictive sandbox; the initial bind failures were environmental. These are Secondlook’s tests, not the five repositories’ own test suites.
+Independent local regression run: `.venv/bin/python -m pytest tests/test_public_repo.py tests/test_result_explanation.py tests/test_dashboard.py -q` — **59 tests passed, 79 subtests passed**. Localhost server tests required execution outside the restrictive sandbox; the initial bind failures were environmental. These are Hackday Idea’s tests, not the five repositories’ own test suites.
 
 ## Follow-up indicated by these tests
 

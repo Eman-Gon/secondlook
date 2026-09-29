@@ -58,7 +58,6 @@ This is a proposed-major-upgrade incompatibility: the existing `^2.1.9` range ex
 
 ## First-pass scope
 
-Inspected manifests and relevant source in: MantisGrid-AI-Hackathon-2026, lookback, Writ, Gauntlet, rescueops-hq, invoiceable, scam_killer, Drawback.ai, AWSDeepAgentsHackathon, grant_finder, pathseekers, theengineer, Almanac, DepScope, no-show, DataBroker, RescueOpsHackWithBay, gpu-energy-recommender, blockchain-ml-representation, centralcoastcauldrons, and PPO-Representation-Learning.
 
 Most repositories were inspected statically. No confirmed finding in this limited scan is not a compatibility guarantee. The audit did not upgrade every dependency or run every application.
 
