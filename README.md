@@ -51,18 +51,6 @@ python -m src.main upgrade-demo
 
 Comparison exit codes are `1` for a confirmed behavior break and `2` for inconclusive evidence or setup/integration failure. Image preparation returns `0` on success. A finding applies only to the supplied source, versions, and tests.
 
-## Configuration
-
-| Variables | Purpose |
-| --- | --- |
-| `GITHUB_TOKEN`, `TARGET_REPO` | Optional GitHub authentication and the target repository |
-| `SANDBOX_IMAGE`, `TEST_COMMAND`, `TEST_TIMEOUT`, `BASELINE_COUNT` | Docker test execution and commit baseline settings |
-| `GROQ_API_KEY` | Inference for live investigations and commit judgments |
-| `BRIGHTDATA_API_KEY` | Upstream source retrieval |
-| `COGNEE_MEMORY_BACKEND` | Compatibility memory backend: `local` or `cloud` |
-| `COGNEE_API_URL`, `COGNEE_API_KEY`, `COGNEE_TENANT_ID` | Cloud memory connection settings; tenant ID is optional |
-
-Cloud mode uses the configured tenant URL and never silently falls back to local memory. It checks processing and retrieved evidence before publishing an index entry. Original commit-review commands use local memory. Prior findings inform new investigations; they do not replace fresh comparisons.
 
 ## Commit review
 
